@@ -742,12 +742,12 @@ public:
         Init(nTypeIn, nVersionIn);
     }
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1300
+if !defined(_MSC_VER) || _MSC_VER >= 1300
     CDataStream(const char* pbegin, const char* pend, int nTypeIn, int nVersionIn) : vch(pbegin, pend)
     {
         Init(nTypeIn, nVersionIn);
     }
-#endif
+endif
 
     CDataStream(const vector_type& vchIn, int nTypeIn, int nVersionIn) : vch(vchIn.begin(), vchIn.end())
     {
