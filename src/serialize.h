@@ -824,7 +824,7 @@ endif
 
 
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1300
+if !defined(_MSC_VER) || _MSC_VER >= 1300
     void insert(iterator it, const char* first, const char* last)
     {
         assert(last - first >= 0);
@@ -837,7 +837,7 @@ endif
         else
             vch.insert(it, first, last);
     }
-#endif
+endif
 
     iterator erase(iterator it)
     {
