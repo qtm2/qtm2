@@ -742,12 +742,12 @@ public:
         Init(nTypeIn, nVersionIn);
     }
 
-if !defined(_MSC_VER) || _MSC_VER >= 1300
+#if !defined(_MSC_VER) || _MSC_VER >= 1300
     CDataStream(const char* pbegin, const char* pend, int nTypeIn, int nVersionIn) : vch(pbegin, pend)
     {
         Init(nTypeIn, nVersionIn);
     }
-endif
+#endif
 
     CDataStream(const vector_type& vchIn, int nTypeIn, int nVersionIn) : vch(vchIn.begin(), vchIn.end())
     {
@@ -822,9 +822,20 @@ endif
             vch.insert(it, first, last);
     }
 
+    void insert(iterator it, std::vector<char>::const_iterator first, std::vector<char>::const_iterator last)
+    {
+        assert(last - first >= 0);
+        if (it == vch.begin() + nReadPos && (unsigned int)(last - first) <= nReadPos)
+        {
+            // special case for inserting at the front when there's room
+            nReadPos -= (last - first);
+            memcpy(&vch[nReadPos], &first[0], last - first);
+        }
+        else
+            vch.insert(it, first, last);
+    }
 
-
-if !defined(_MSC_VER) || _MSC_VER >= 1300
+#if !defined(_MSC_VER) || _MSC_VER >= 1300
     void insert(iterator it, const char* first, const char* last)
     {
         assert(last - first >= 0);
@@ -837,7 +848,7 @@ if !defined(_MSC_VER) || _MSC_VER >= 1300
         else
             vch.insert(it, first, last);
     }
-endif
+#endif
 
     iterator erase(iterator it)
     {
