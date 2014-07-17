@@ -1,3 +1,2 @@
 
-Quantum 
-
+Quantum 2 Wallet
