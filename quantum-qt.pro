@@ -2,7 +2,7 @@
 
 TEMPLATE = app
 TARGET = quantum-qt
-VERSION = 2.0.0.3
+VERSION = 2.0.1.3
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
